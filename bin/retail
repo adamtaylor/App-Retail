@@ -1,0 +1,43 @@
+#!/usr/bin/env perl
+use strict;
+use warnings;
+use GetOpt::Long;
+use Pod::Usage;
+
+my $STATEPATH = "/tmp";
+my $DEBUG = 0;
+
+=head1 NAME
+
+retail - a log file tailing utility
+
+=head1 SYNOPSIS
+
+Usage: retail [-d] [-h] [-s <state dir>] -f <logfile pattern>
+
+=head1 DESCRIPTION
+
+Usage: retail [-d] [-h] [-s <state dir>] -f <logfile pattern>
+
+retail is a log file tailer in the spirit of logtail that keeps state in
+an NDBM file and can follow all log files matching a regular expression
+pattern.
+
+For example, to follow logs created with a time stamp suffix
+of the form access.YYYY-MM-DD (note the escapes for shell):
+    retail -f /var/log/apache/access.\\\\d{4}-\\\\d{2}-\\\\d{2}
+
+retail compares the file name of the log file (but NOT any parts of the path)
+to the regular expression when selecting files to follow.
+
+=head1 CREDITS
+
+This is a simple re-working of <retail|https://github.com/rowanredbeard/retail>,
+which is an extension of logtail (part of the
+<logcheck|http://logcheck.org/index.html> project).
+
+=head1 SEE ALSO
+
+L<App::Retail>
+
+=cut
