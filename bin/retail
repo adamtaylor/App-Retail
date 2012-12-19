@@ -6,7 +6,7 @@
 
 use strict;
 use warnings;
-use GetOpt::Long;
+use Getopt::Long;
 use Pod::Usage;
 
 my %opt = ();
