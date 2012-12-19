@@ -1,4 +1,9 @@
 #!/usr/bin/env perl
+
+# ABSTRACT: logtail like log tailing tool that accepts regex matching filenames
+# PODNAME: App::retail
+# VERSION
+
 use strict;
 use warnings;
 use GetOpt::Long;

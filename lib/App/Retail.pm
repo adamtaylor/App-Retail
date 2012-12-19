@@ -1,3 +1,4 @@
+# ABSTRACT: Driver class to tail log files
 package App::Retail;
 use strict;
 use warnings;
@@ -6,6 +7,8 @@ use SDBM_File;
 use File::Basename;
 use Digest::SHA1 qw /sha1_hex sha1_base64/;
 use Carp;
+
+# VERSION
 
 sub new {
     my ( $class, $args ) = @_;
