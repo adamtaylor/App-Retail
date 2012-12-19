@@ -4,8 +4,18 @@ use warnings;
 use GetOpt::Long;
 use Pod::Usage;
 
-my $STATEPATH = "/tmp";
-my $DEBUG = 0;
+my %opt = ();
+my $result = GetOptions (
+    \%opt,
+    "help|h|?",
+    "debug|d",
+    "state|s=s",
+    "filepattern|f=s",
+);
+pod2usage(1) if (!$result || $opt{help} || !$opt{filepattern});
+
+my $retail = App::Retail->new( \%opt );
+$retail->extract_log_lines();
 
 =head1 NAME
 
@@ -20,7 +30,7 @@ Usage: retail [-d] [-h] [-s <state dir>] -f <logfile pattern>
 Usage: retail [-d] [-h] [-s <state dir>] -f <logfile pattern>
 
 retail is a log file tailer in the spirit of logtail that keeps state in
-an NDBM file and can follow all log files matching a regular expression
+an SDBM file and can follow all log files matching a regular expression
 pattern.
 
 For example, to follow logs created with a time stamp suffix
