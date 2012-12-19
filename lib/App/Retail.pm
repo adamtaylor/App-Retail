@@ -10,12 +10,30 @@ use Carp;
 
 # VERSION
 
+sub debug {
+    my $self = shift;
+    if (@_) { $self->{debug} = shift }
+    return $self->{debug};
+}
+
+sub statepath {
+    my $self = shift;
+    if (@_) { $self->{statepath} = shift }
+    return $self->{statepath};
+}
+
+sub filepattern {
+    my $self = shift;
+    if (@_) { @{ $self->{filepattern} } = shift }
+    return $self->{filepattern};
+}
+
 sub new {
     my ( $class, $args ) = @_;
 
-    my $self = {};
-    $self->{debug} = $args->{debug}||0;
-    $self->{state} = $args->{state}||"/tmp";
+    my $self             = {};
+    $self->{debug}       = $args->{debug}||0;
+    $self->{statepath}   = $args->{statepath}||"/tmp";
     $self->{filepattern} = $args->{filepattern}||croak "filepattern required";
 
     bless $self, $class;
@@ -114,7 +132,7 @@ sub get_state_file {
     # state path is the file name.
     my $statefile;
     if (-d $self->statepath) {
-        $statefile = "$self->statepath/retail-" . sha1_hex($self->filepattern);
+        $statefile = $self->statepath . "/retail-" . sha1_hex($self->filepattern);
     } else {
         my $dirname = dirname ($self->statepath);
         if (-d $dirname) {

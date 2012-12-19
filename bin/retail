@@ -8,13 +8,14 @@ use strict;
 use warnings;
 use Getopt::Long;
 use Pod::Usage;
+use App::Retail;
 
 my %opt = ();
 my $result = GetOptions (
     \%opt,
     "help|h|?",
     "debug|d",
-    "state|s=s",
+    "statepath|s=s",
     "filepattern|f=s",
 );
 pod2usage(1) if (!$result || $opt{help} || !$opt{filepattern});
